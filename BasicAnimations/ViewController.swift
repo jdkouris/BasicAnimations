@@ -21,8 +21,13 @@ class ViewController: UIViewController {
         redView.backgroundColor = .red
         redView.translatesAutoresizingMaskIntoConstraints = false
         
+        let blueView = UIView()
+        blueView.backgroundColor = .blue
+        blueView.translatesAutoresizingMaskIntoConstraints = false
+        
         // Adding the redView as a subview of the view controller's view
         view.addSubview(redView)
+        view.addSubview(blueView)
         
 //        let leadingConstraint = NSLayoutConstraint(item: redView, attribute: .leading, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .leading, multiplier: 1, constant: 30)
 //        let verticalConstraint = NSLayoutConstraint(item: redView, attribute: .top, relatedBy: .equal, toItem: view.safeAreaLayoutGuide, attribute: .top, multiplier: 1, constant: 0)
@@ -34,7 +39,12 @@ class ViewController: UIViewController {
         let heightConstraint = redView.heightAnchor.constraint(equalToConstant: 100)
         let aspectRatioConstraint = redView.widthAnchor.constraint(equalTo: redView.heightAnchor)
         
-        NSLayoutConstraint.activate([leadingConstraint, verticalConstraint, heightConstraint, aspectRatioConstraint])
+        let leadingBlueConstraint = blueView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 30)
+        let verticalBlueConstraint = blueView.topAnchor.constraint(equalTo: redView.bottomAnchor, constant: 30)
+        let heightBlueConstraint = blueView.heightAnchor.constraint(equalToConstant: 100)
+        let aspectRatioBlueConstraint = blueView.widthAnchor.constraint(equalTo: redView.heightAnchor)
+        
+        NSLayoutConstraint.activate([leadingConstraint, verticalConstraint, heightConstraint, aspectRatioConstraint, leadingBlueConstraint, verticalBlueConstraint, heightBlueConstraint, aspectRatioBlueConstraint])
         
     }
 
