@@ -82,6 +82,26 @@ class ViewController: UIViewController {
     }
     
     func configureButtons() {
+        let rotateButton = UIButton(type: .system)
+        rotateButton.setTitle("Rotate", for: .normal)
+        rotateButton.addTarget(self, action: #selector(rotateButtonTapped), for: .touchUpInside)
+        
+        let keyButton = UIButton(type: .system)
+        keyButton.setTitle("Key", for: .normal)
+        keyButton.addTarget(self, action: #selector(keyButtonTapped), for: .touchUpInside)
+        
+        let springButton = UIButton(type: .system)
+        springButton.setTitle("Spring", for: .normal)
+        springButton.addTarget(self, action: #selector(springButtonTapped), for: .touchUpInside)
+        
+        let squashButton = UIButton(type: .system)
+        squashButton.setTitle("Squash", for: .normal)
+        squashButton.addTarget(self, action: #selector(squashButtonTapped), for: .touchUpInside)
+        
+        let anticButton = UIButton(type: .system)
+        anticButton.setTitle("Antic", for: .normal)
+        anticButton.addTarget(self, action: #selector(anticButtonTapped), for: .touchUpInside)
+        
         let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(stackView)
@@ -89,11 +109,37 @@ class ViewController: UIViewController {
         stackView.axis = .horizontal
         stackView.distribution = .equalSpacing
         
+        stackView.addArrangedSubview(rotateButton)
+        stackView.addArrangedSubview(keyButton)
+        stackView.addArrangedSubview(springButton)
+        stackView.addArrangedSubview(squashButton)
+        stackView.addArrangedSubview(anticButton)
+        
         NSLayoutConstraint.activate([
-            stackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
-            stackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: 16),
-            stackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 16)
+            stackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
+            stackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
+            stackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10)
         ])
+    }
+    
+    @objc func rotateButtonTapped() {
+        
+    }
+    
+    @objc func keyButtonTapped() {
+        
+    }
+    
+    @objc func springButtonTapped() {
+        
+    }
+    
+    @objc func squashButtonTapped() {
+        
+    }
+    
+    @objc func anticButtonTapped() {
+        
     }
     
 }
