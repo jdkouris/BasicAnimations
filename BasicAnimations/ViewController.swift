@@ -44,7 +44,16 @@ class ViewController: UIViewController {
         let heightBlueConstraint = blueView.heightAnchor.constraint(equalToConstant: 100)
         let aspectRatioBlueConstraint = blueView.widthAnchor.constraint(equalTo: redView.heightAnchor)
         
-        NSLayoutConstraint.activate([leadingConstraint, verticalConstraint, heightConstraint, aspectRatioConstraint, leadingBlueConstraint, verticalBlueConstraint, heightBlueConstraint, aspectRatioBlueConstraint])
+        NSLayoutConstraint.activate([
+            leadingConstraint,
+            verticalConstraint,
+            heightConstraint,
+            aspectRatioConstraint,
+            leadingBlueConstraint,
+            verticalBlueConstraint,
+            heightBlueConstraint,
+            aspectRatioBlueConstraint
+        ])
         
     }
 
