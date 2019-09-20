@@ -9,11 +9,21 @@
 import UIKit
 
 class ViewController: UIViewController {
+    
+    let label = UILabel()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        configureRedView()
+//        configureRedView()
+        configureLabel()
+        configureButtons()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        label.center = view.center
     }
     
     func configureRedView() {
@@ -54,9 +64,37 @@ class ViewController: UIViewController {
             heightBlueConstraint,
             aspectRatioBlueConstraint
         ])
-        
     }
-
-
+    
+    func configureLabel() {
+        label.frame = CGRect(x: 0, y: 0, width: 200, height: 200)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(label)
+        
+        label.widthAnchor.constraint(equalTo: label.heightAnchor).isActive = true
+        
+        label.layer.cornerRadius = 12
+        label.layer.borderWidth = 2
+        
+        label.text = "👨‍💻"
+        label.textAlignment = .center
+        label.font = UIFont.systemFont(ofSize: 96)
+    }
+    
+    func configureButtons() {
+        let stackView = UIStackView()
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(stackView)
+        
+        stackView.axis = .horizontal
+        stackView.distribution = .equalSpacing
+        
+        NSLayoutConstraint.activate([
+            stackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
+            stackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: 16),
+            stackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 16)
+        ])
+    }
+    
 }
 
