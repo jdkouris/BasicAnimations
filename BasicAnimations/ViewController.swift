@@ -123,23 +123,104 @@ class ViewController: UIViewController {
     }
     
     @objc func rotateButtonTapped() {
-        
+        // rotate clockwise 45 degrees
+        UIView.animate(withDuration: 1, animations: {
+            self.label.transform = CGAffineTransform(rotationAngle: CGFloat.pi/4)
+        }) { (_) in
+            // rotate counter-clockwise 45 degrees
+            UIView.animate(withDuration: 1, animations: {
+                self.label.transform = .identity
+            })
+        }
     }
     
     @objc func keyButtonTapped() {
+        label.center = view.center
         
+        UIView.animateKeyframes(withDuration: 4, delay: 0, options: [], animations: {
+            
+            // rotate clockwise 45 degrees
+            UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 0.25, animations: {
+                self.label.transform = CGAffineTransform(rotationAngle: CGFloat.pi/4)
+            })
+            
+            // rotate counter-clockwise 45 degrees
+            UIView.addKeyframe(withRelativeStartTime: 0.25, relativeDuration: 0.25, animations: {
+                self.label.transform = .identity
+            })
+            
+            // move up by some points
+            UIView.addKeyframe(withRelativeStartTime: 0.5, relativeDuration: 0.25, animations: {
+                self.label.center = CGPoint(x: self.view.center.x, y: self.view.center.y - 60)
+            })
+            
+            // move back back down by same number of points
+            UIView.addKeyframe(withRelativeStartTime: 0.75, relativeDuration: 0.25, animations: {
+                self.label.center = self.view.center
+            })
+            
+        }, completion: nil)
     }
     
     @objc func springButtonTapped() {
+        label.center = view.center
+        label.transform = CGAffineTransform(scaleX: 0.0001, y: 0.0001)
         
+        UIView.animate(withDuration: 3, delay: 0, usingSpringWithDamping: 0.3, initialSpringVelocity: 0, options: [.curveEaseInOut], animations: {
+            self.label.transform = .identity
+        }, completion: nil)
     }
     
     @objc func squashButtonTapped() {
+        // start offscreen
+        label.center = CGPoint(x: view.center.x, y: -label.bounds.size.height)
         
+        let animationBlock = {
+            // animate down to center
+            UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 0.4, animations: {
+                self.label.center = self.view.center
+            })
+            
+            // squish horizontally (springy)
+            UIView.addKeyframe(withRelativeStartTime: 0.3, relativeDuration: 0.2, animations: {
+                self.label.transform = CGAffineTransform(scaleX: 1.7, y: 0.6)
+            })
+            
+            UIView.addKeyframe(withRelativeStartTime: 0.5, relativeDuration: 0.2, animations: {
+                self.label.transform = CGAffineTransform(scaleX: 0.6, y: 1.7)
+            })
+            
+            // squish vertically (springy)
+            UIView.addKeyframe(withRelativeStartTime: 0.7, relativeDuration: 0.15, animations: {
+                self.label.transform = CGAffineTransform(scaleX: 1.11, y: 0.9)
+            })
+            
+            UIView.addKeyframe(withRelativeStartTime: 0.85, relativeDuration: 0.15, animations: {
+                self.label.transform = .identity
+            })
+        }
+        
+        UIView.animateKeyframes(withDuration: 1.5, delay: 0, options: [], animations: animationBlock, completion: nil)
     }
     
     @objc func anticButtonTapped() {
+        label.center = view.center
+        let animBlock = {
+            UIView.addKeyframe(withRelativeStartTime: 0.0, relativeDuration: 0.1, animations: {
+                self.label.transform = CGAffineTransform(rotationAngle: CGFloat.pi/16)
+            })
+            
+            UIView.addKeyframe(withRelativeStartTime: 0.1, relativeDuration: 0.2, animations: {
+                self.label.transform = CGAffineTransform(rotationAngle: -1 * CGFloat.pi/16)
+            })
+            
+            UIView.addKeyframe(withRelativeStartTime: 0.2, relativeDuration: 0.8, animations: {
+                self.label.center = CGPoint(x: self.view.bounds.size.width + self.label.bounds.size.width, y: self.view.center.y)
+            })
+            
+        }
         
+        UIView.animateKeyframes(withDuration: 1.5, delay: 0.0, options: [], animations: animBlock, completion: nil)
     }
     
 }
